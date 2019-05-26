@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import tech.claudioed.systems.domain.handler.CrmHandler;
 import tech.claudioed.systems.domain.handler.IssuerHandler;
 
 /**
@@ -15,13 +16,15 @@ import tech.claudioed.systems.domain.handler.IssuerHandler;
  * Project systems
  */
 @Configuration
-public class IssuerRouter {
+public class ApplicationRouter {
 
   @Bean
-  public RouterFunction<ServerResponse> root(IssuerHandler issuerHandler) {
+  public RouterFunction<ServerResponse> root(IssuerHandler issuerHandler, CrmHandler crmHandler) {
     return RouterFunctions.route()
         .GET("/issuers/{id}", accept(MediaType.APPLICATION_JSON), issuerHandler::find)
         .POST("/issuers", accept(MediaType.APPLICATION_JSON), issuerHandler::create)
+        .GET("/crms/{id}", accept(MediaType.APPLICATION_JSON), crmHandler::find)
+        .POST("/crms", accept(MediaType.APPLICATION_JSON), crmHandler::create)
         .build();
   }
 
