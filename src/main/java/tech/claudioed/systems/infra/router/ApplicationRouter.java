@@ -21,10 +21,10 @@ public class ApplicationRouter {
   @Bean
   public RouterFunction<ServerResponse> root(IssuerHandler issuerHandler, CrmHandler crmHandler) {
     return RouterFunctions.route()
-        .GET("/issuers/{id}", accept(MediaType.APPLICATION_JSON), issuerHandler::find)
-        .POST("/issuers", accept(MediaType.APPLICATION_JSON), issuerHandler::create)
-        .GET("/crms/{id}", accept(MediaType.APPLICATION_JSON), crmHandler::find)
-        .POST("/crms", accept(MediaType.APPLICATION_JSON), crmHandler::create)
+        .GET("/api/issuers/{id}", accept(MediaType.APPLICATION_JSON), issuerHandler::find)
+        .POST("/api/issuers", accept(MediaType.APPLICATION_JSON), issuerHandler::create)
+        .GET("/api/crms/{id}", accept(MediaType.APPLICATION_JSON), crmHandler::find)
+        .POST("/api/crms", accept(MediaType.APPLICATION_JSON), crmHandler::create)
         .build();
   }
 
